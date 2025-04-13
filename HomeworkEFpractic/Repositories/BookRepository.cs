@@ -1,11 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using HomeworkEFpractic.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HomeworkEFpractic
+namespace HomeworkEFpractic.Repositories
 {
     public class BookRepository
     {
@@ -93,12 +94,13 @@ namespace HomeworkEFpractic
 
         public Book GetLatestBook()
         {
-            return _context.Books
+            var latestBook = _context.Books
                 .Include(b => b.Author)
                 .Include(b => b.Genre)
                 .OrderByDescending(b => b.Year)
                 .ThenByDescending(b => b.Id)
-                .FirstOrDefault();
+                .FirstOrDefault() ?? throw new Exception("No books found in the database");
+            return latestBook;
         }
 
         public List<Book> GetAllBooksSortedByAlphabet()

@@ -1,11 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using HomeworkEFpractic.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HomeworkEFpractic
+namespace HomeworkEFpractic.Repositories
 {
     public class UserRepository
     {
@@ -24,9 +25,9 @@ namespace HomeworkEFpractic
         {
             return _context.Users.Include(u => u.Books).ToList();
         }
-        public void AddUser(User user)
+        public void AddUser(params User[] users)
         {
-            _context.Users.Add(user);
+            _context.Users.AddRange(users);
             _context.SaveChanges();
         }
         public void DeleteUser(int id)

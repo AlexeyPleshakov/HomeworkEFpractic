@@ -4,15 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HomeworkEFpractic
+namespace HomeworkEFpractic.Entities
 {
-    public class User
+    public class Genre
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string? Email { get; set; }
-
-        // Navigation property
         public List<Book> Books { get; set; } = new List<Book>();
     }
 }
